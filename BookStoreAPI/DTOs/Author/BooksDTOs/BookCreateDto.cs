@@ -3,25 +3,28 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BookStoreAPI.DTOs.Author
 {
-    public class CreateBookDto : Profile
+    public class BookCreateDto
     {
         [Required]
-        [MaxLength(35)]
+        [MaxLength(50)]
         public string Title { get; set; }
 
         [Required]
-        [MaxLength(4)]
-        [MinLength(4)]
+        [Range(1800, 2022)]
         public int Year { get; set; }
 
-        [MaxLength(4)]
+        [Required]
+        public string Isbn { get; set; }
+
+        [Required]
+        [StringLength(250, MinimumLength =10)]
         public string Summary { get; set; }
 
         [MaxLength(200)]
         public string Image { get; set; }
 
         [Required]
-        [Range(0.01, 10000.00)]
+        [Range(0, int.MaxValue)]
         public double Price { get; set; }
     }
 }
