@@ -1,3 +1,4 @@
+using BookStoreAPI.Configurations;
 using BookStoreAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -5,9 +6,12 @@ using Serilog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connString = builder.Configuration.GetConnectionString("BookStoreAppDbConnection");
+
+var connString = builder.Configuration.GetConnectionString("NET6MSIContext");
 //Entity framework allows to connect to multiple db engines, not only SQL Server (For example Postgres)
 builder.Services.AddDbContext<NET6MSIContext>(options => options.UseSqlServer(connString));
+
+builder.Services.AddAutoMapper(typeof(MapperConfig));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
